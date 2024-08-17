@@ -17,16 +17,8 @@ class ChirpController extends Controller
     public function index(): Response 
     {
         return Inertia::render('Chirps/Index', [
-            'chirps' => Chirp::with('user:id,name')->latest()->get(),
+            'chirps' => Chirp::with('user:id,name')->latest()->latest('id')->get(),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -41,22 +33,6 @@ class ChirpController extends Controller
         $request->user()->chirps()->create($validated);
  
         return redirect(route('chirps.index'));
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Chirp $chirp)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Chirp $chirp)
-    {
-        //
     }
 
     /**

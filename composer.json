@@ -20,7 +20,7 @@
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
-        "phpunit/phpunit": "^11.0.1"
+        "pestphp/pest": "^2.35"
     },
     "autoload": {
         "psr-4": {
@@ -43,12 +43,28 @@
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('.env.testing') || copy('.env.testing.example', '.env.testing');\""
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php -r \"file_exists('database/database_testing.sqlite') || touch('database/database_testing.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "install-chiper": [
+            "composer install",
+            "npm i",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('.env.testing') || copy('.env.testing.example', '.env.testing');\"",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php -r \"file_exists('database/database_testing.sqlite') || touch('database/database_testing.sqlite');\"",
+            "@php artisan key:generate --ansi",
+            "@php artisan key:generate --ansi --env=testing",
+            "@php artisan migrate --graceful --ansi",
+            "@php artisan migrate --graceful --ansi --env=testing",
+            "npm run build",
+            "@php artisan serve"
         ]
     },
     "extra": {
