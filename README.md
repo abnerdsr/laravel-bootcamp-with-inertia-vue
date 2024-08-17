@@ -20,6 +20,11 @@ Instale o projeto
 composer install-chiper
 ```
 
+Rode o servidor local
+```sh
+php artisan serve --port=8000
+```
+
 Agora abra um outro terminal para manter o worker das filas rodando
 
 Rode os workers das filas
@@ -45,13 +50,6 @@ Para rodar os testes execute
 ```
 
 ## Observações
-
-se o servidor cair ou se quiser rodar em algum daemon 
-
-você pode subir ele novamente com o comando abaixo
-```sh
-php artisan serve
-```
 
 se quiser ver alterações de front em tempo real
 ```sh

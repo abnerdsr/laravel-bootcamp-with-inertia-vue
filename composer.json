@@ -63,8 +63,7 @@
             "@php artisan key:generate --ansi --env=testing",
             "@php artisan migrate --graceful --ansi",
             "@php artisan migrate --graceful --ansi --env=testing",
-            "npm run build",
-            "@php artisan serve"
+            "npm run build"
         ]
     },
     "extra": {
